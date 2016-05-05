@@ -1,0 +1,16 @@
+{
+  "name": "LinkedIn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "ejs": "*",
+    "password-hash-and-salt":"0.1.2",
+    "mysql":"*",
+    "nodemailer":"^0.7.1",
+    "node-geocoder":"3.9.1"
+    }
+}

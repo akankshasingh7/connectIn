@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Test</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("button").click(function(){
+        alert("in js");
+        $.get("http://localhost:3000/testing", function(data){
+            alert("Data: " + data + "\nStatus: " );
+        });
+    });
+});
+
+</script>
+</head>
+<body>
+<form>
+Enter data<input id="par1" name="" value=""/>
+<button>Click Here</button>
+</form>
+<div>
+<table align="center" border="1">
+		<tr>Element</tr>
+		<td>value</td>
+
+</table>
+</div>
+</body>
+</html>

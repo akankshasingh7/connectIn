@@ -1,0 +1,141 @@
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css">
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  </head>
+<body ng-app="">
+<div class="row" style="height: 60px; background-color: #eee;border-bottom:aqua;">
+	<div class="col-md-4" >
+		<div class="container" style="width:auto;">
+			<h1 style="text-align: right;"><img src="https://static.licdn.com/scds/common/u/img/logos/logo_132x32_2.png" alt="LinkedIn" class="logo" height="32" width="132"></h1>
+
+		</div>
+	</div>
+	<div class="col-md-2">
+		
+	</div>
+	<div class="col-md-6">
+	<div ng-controller="signInController" class="container" style="margin-top: 10px;">
+		<form class="form-inline" >
+			  <div class="form-group">
+			    <label for="name">Email</label>
+			    <input type="email" ng-model="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputEmail2">Password</label>
+			    <input type="password" ng-model="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+			  </div>
+			  <button type="button"  ng-click="signIn()" class="btn btn-primary">Sign In</button>
+		</form>
+	</div>
+	</div>
+   </div> <!-- end of header row -->
+   <div class="row" style="height: 50px;">
+   	<div class="col-lg-12">
+   		<h1 style="text-align: center; font: bold;font-family: arial; ">Be great at what you do !</h1>
+   	</div>
+   </div>
+   <div class="row">
+   <div class="col-md-6" style="margin-right: 0px;">
+   <div class="" style="float: right; margin-right: 0px; margin-top: 70px;width: 600px;">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_1_150x150_v1.png" width="150" height="150" alt="Male Headshot">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_2_150x150_v1.png" width="150" height="150" alt="Female Headshot">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_3_150x150_v1.png" width="150" height="150" alt="Male Headshot">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_4_150x150_v1.png" width="150" height="150" alt="Female Headshot">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_5_150x150_v1.png" width="150" height="150" alt="Male Headshot">
+<img src="https://static.licdn.com/scds/common/u/images/apps/home/guesthome/ghp_international_6_150x150_v1.png" width="150" height="150" alt="Male Headshot">
+   
+   </div>
+   </div>
+   <div class="col-md-6">
+   <div class="row">
+   	<div ng-controller="registerController" class="container" style="margin-top: 60px;width: 500px;padding-right: 20px;padding-bottom:10px;" >
+        <h4>Registration takes less than two minutes!!</h4>
+        <form class="form-horizontal" role="form" >
+       		 <div class="form-group">
+     			<div class="col-sm-6">
+      				<input ng-model="firstName" class="form-control" id="focusedInput" type="text" placeholder="First Name" required="required">
+   				 </div>
+   				 <div class="col-sm-6">
+      				<input ng-model="lastName" class="form-control" id="focusedInput" type="text" placeholder="Last Name" required="required">
+   				 </div>
+ 			 </div>	
+ 			  <div class="container" style=" widht:auto; height: 10px;"></div>
+		  <div class="form-group">
+     			<div class="col-sm-12">
+      				<input ng-model="email" class="form-control" id="focusedInput" type="text" placeholder="Email Id" required="required">
+   				 </div>
+   			</div>
+   			 <div class="container" style="widht:auto;height: 10px;"></div>
+   			<div class="form-group">
+     			<div class="col-sm-12">
+      				<input ng-model="password" class="form-control" id="focusedInput" type="text" placeholder="Password" required="required">
+   				 </div>
+   			</div>
+   			 <div class="container" style="widht:auto;height: 10px;"></div>
+		        <button ng-click="signUp()" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+		  </form>
+
+    </div> 		
+   
+   </div>
+   
+   </div>
+   
+   </div>
+   <script type="text/javascript">
+ 	function registerController($scope,$http,$location) {
+	    
+		$scope.signUp = function() {
+	    	$http({
+	            method: 'POST',
+	            url: '/register',
+	            data: { "firstName": $scope.firstName, "lastName":$scope.lastName, "email":$scope.email, "password": $scope.password }
+	            
+	         }).success(function(response){
+	           alert($scope.firstName);
+	           // alert(JSON.stringify(response));
+	            
+	           // if(response.login == "Success")
+	           	window.location = '/getStarted';
+	           // else
+	           // 	window.location = '/failLogin';
+	        }).error(function(error){
+	            alert("error");
+	        });
+	    };
+	}
+	function signInController($scope,$http,$location)
+	{
+		$scope.signIn = function() {
+	    	$http({
+	            method: 'POST',
+	            url: '/signin',
+	            data: { "email":$scope.email, "password": $scope.password }
+	            
+	         }).success(function(response){
+	           alert($scope.firstName);
+	           // alert(JSON.stringify(response));
+	            
+	           // if(response.login == "Success")
+	           	window.location = '/myProfile';
+	           // else
+	           // 	window.location = '/failLogin';
+	        }).error(function(error){
+	            alert("error");
+	            window.location = '/failLogin';
+	        });
+	    };
+
+	}
+	</script>
+
+   </script>
+   </body>
+   </html>

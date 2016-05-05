@@ -1,0 +1,350 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script src="/js/profile.js"></script>
+</head>
+<body ng-app="" style="background-color:lavender">
+<div class="row" style="height: 100px;">
+	<div class="col-md-12">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar">My Profile</span>
+            <span class="icon-bar">My Connections</span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">LinkedIn</a>
+          
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/myProfile">Profile</a></li>
+            <li><a href="/myConnections">Connections</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li ><a href="/displayMembers">Search Members</a></li>
+         	          
+          <li>
+          
+          		 <a href="/logout"><span>Logout</span></a>
+           
+          </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+   </div>
+   </div> <!-- end of header row -->
+   <div class="row" style="height:auto;">
+   	<div class="col-md-2" ></div> 
+   	<div class="col-md-6" >
+    <div class="container" style="height: auto;width: auto;">
+      <!-- Example row of columns -->
+      
+ <div ng-controller="displayDetail" class="panel panel-default" style="background-color:#ffffff; height: auto; width:auto;"  >
+	<div class="panel-body">
+		<div class="col-md-4">
+			<div class="row">
+				<img src="../images/pic2.jpg" alt=" Please upload your profile picture!" class="img-thumbnail" width="200" height="200">
+			</div>
+			<div class="row" style="background-color: lavender; width: 200px;">
+				<a><p align="center">Add Photo</p></a>
+			</div>
+	  	</div>
+
+ 	<div class="col-md-8">
+ 		<div ng-repeat="x in user" >
+			<div class="container" onmouseover="this.style.background='#eee';" onmouseout="this.style.background='white';" style="width:auto;" contenteditable="true">
+				<h3><span ng-hide="editing" ng-click="editing = true">{{x.firstName}}</span> &nbsp;&nbsp;<span ng-hide="editing" ng-click="editing = true">{{x.lastName}}</span></h3>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.city}} &nbsp; , &nbsp;</span><span ng-hide="editing" ng-click="editing = true">{{x.country}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.schoolOrCompany}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.role}}</span></p>
+				<p style="padding-top: 20px;"><span ng-hide="editing" ng-click="editing = false">Last logged in at : {{x.lastLoggedIn}}</span></p>
+				<form ng-show="editing" ng-submit="editing = false">
+                    <label>FirstName:</label>
+                    <input type="text" ng-model="x.firstName" placeholder="firstName" ng-required/>
+                    <label>Last Name:</label>
+                    <input type="text" ng-model="x.lastName" maxlength="4" placeholder="firstName" />
+                    <label>City:</label>
+                    <input type="text" ng-model="x.city" maxlength="4" placeholder="Year" />
+                    <label>Country:</label>
+                    <input type="text" ng-model="x.country" placeholder="Date" />
+                    <label>School/Company</label>
+                    <input type="text" ng-model="x.schoolOrCompany" placeholder="Name" />
+                    <label>Role</label>
+                    <input type="text" ng-model="x.role" placeholder="activities"/>
+                    <br/>
+                    <button class="btn btn-info " type="submit" ng-click="editDetail(x)">Save</button> &nbsp;&nbsp; <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                  </form>
+			</div>
+		</div>
+		</div>
+ 	</div>
+ 	<div class="panel-footer" align="center">My Details</div>
+</div>
+ <div class="container" style="height: 10px"></div>
+<div ng-controller="displaySummary" class="panel panel-default" style="background-color:#ffffff; height: auto; width:auto;"  >
+	<div class="panel-body">
+	<h2>Summary</h2>
+					<div id="addSummary" class="collapse">
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+			    			<label class="comment">Summary</label>
+			    			<textarea ng-model="summary" rows="4" maxlength="500" class="form-control" id="focusedInput" type="text" placeholder="Enter School Name" required="required"></textarea>
+						 </div>
+ 						 <button type="submit" ng-click="saveSummary()" class="btn btn-info">Save</button>&nbsp;&nbsp; <button data-toggle="collapse" data-target="#addSummary" type="button" class="btn btn-default">Cancel</button>
+ 			 
+ 					</form>
+ 					</div>
+ 					<div ng-repeat="x in summarys" >
+ 					<div class="container" onmouseover="this.style.background='#eee';" onmouseout="this.style.background='white';" style="width:auto;" contenteditable="true">
+			
+ 					<p><span ng-hide="editing" ng-click="editing = true">{{x.summary}}</span></p>
+ 						 <form ng-show="editing" ng-submit="editing = false">
+ 		 						 <label>Description:</label>
+                   				 <input type="text" ng-model="x.summary" placeholder="description"/>
+                 			   <br/>
+                  		  		<button class="btn btn-info " type="submit" ng-click="editSum(x)">Save</button> &nbsp;&nbsp; <button class="btn btn-warning" ng ng-click="cancel()">Cancel</button>
+                  		 </form>
+                  	</div>
+                  	</div>
+ 			
+ 	</div>
+ 	<a><div class="panel-footer"  data-toggle="collapse" data-target="#addSummary" style="text-align: center;">Add Summary</div></a>
+		
+		
+</div>  
+
+ <div class="container" style="height: 10px"></div>       
+<div ng-controller="displayEducation" class="panel panel-default" style="background-color:#ffffff; height: auto; width:auto;" >
+ 	<div class="panel-body">
+ 	<h2>Education</h2>
+ 	
+		<div id="addEducation" class="collapse">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+    			<label class="col-sm-2 control-label">School Name</label>
+    			<div class="col-sm-10">
+      				<input ng-model="school" class="form-control" id="focusedInput" type="text" placeholder="Enter School Name" required="required">
+   				 </div>
+ 			 </div>	 			
+ 			  <div class="form-group">
+    			<label class="col-sm-2 control-label"> From:</label>
+    			<div class="col-sm-4">
+      				<input ng-model="dateFrom" maxlength="4" class="form-control" id="focusedInput" type="number" placeholder="Enter Year">
+   				 </div>
+   				 <label class="col-sm-2 control-label"> Till:</label>
+    			<div class="col-sm-4">
+      				<input ng-model="dateTill" maxlength="4" class="form-control" id="focusedInput" type="number" placeholder="Enter Year">
+   				 </div>
+ 			 </div>
+ 			 <div class="form-group">
+    			<label class="col-sm-2 control-label">Field of Study</label>
+    			<div class="col-sm-10">
+      				<input ng-model="fieldOfStudy" class="form-control" id="focusedInput" type="text" placeholder="Enter field of study">
+   				 </div>
+ 			 </div>
+ 			 <div class="form-group">
+    			<label class="col-sm-2 control-label">Grades</label>
+    			<div class="col-sm-10">
+      				<input ng-model="grade" class="form-control" id="focusedInput" type="number" placeholder="Enter grades">
+   				 </div>
+ 			 </div>
+ 			 <div class="form-group">
+				  <label for="comment">Activities:</label>
+				  <textarea ng-model="activities" class="form-control" rows="4" maxlength="500" id="comment"></textarea>
+			</div>
+			<div class="form-group">
+			  <label for="comment">Description:</label>
+			  <textarea ng-model="description" class="form-control" rows="5" maxlength="500" id="comment"></textarea>
+			</div>
+			<button type="submit" ng-click="saveEduInfo()" class="btn btn-info">Save</button>&nbsp;&nbsp; <button data-toggle="collapse" data-target="#addEducation" type="button" class="btn btn-default">Cancel</button>
+ 			 </form>
+			</div>
+		<div ng-repeat="x in schools" >
+			<div class="container" onmouseover="this.style.background='#eee';" onmouseout="this.style.background='white';" style="width:auto;" contenteditable="true">
+				<h3><span ng-hide="editing" ng-click="editing = true">{{x.school}}</span></h3>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.dateFrom}} - {{x.dateTill}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.fieldOfStudy}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.grade}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.activities}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.description}}</span></p>
+				<form ng-show="editing" ng-submit="editing = false">
+                    <label>Name:</label>
+                    <input type="text" ng-model="x.school" placeholder="Name" ng-required/>
+                    <label>Date From:</label>
+                    <input type="number" ng-model="x.dateFrom" maxlength="4" placeholder="Year" />
+                    <label>Date Till:</label>
+                    <input type="number" ng-model="x.dateTill" maxlength="4" placeholder="Year" />
+                    <label>Field of Study:</label>
+                    <input type="text" ng-model="x.fieldOfStudy" placeholder="Date" />
+                    <label>Grade:</label>
+                    <input type="text" ng-model="x.grade" placeholder="Name" />
+                    <label>Activities:</label>
+                    <input type="text" ng-model="x.activities" placeholder="activities"/>
+                   <label>Description:</label>
+                    <input type="text" ng-model="x.description" placeholder="description"/>
+                  
+                    <br/>
+                    <button class="btn btn-info " type="submit" ng-click="editEdu(x)">Save</button> &nbsp;&nbsp; <button class="btn btn-warning" ng ng-click="cancel()">Cancel</button>
+                  </form>
+			</div>
+		</div>
+		</div>
+		<a><div class="panel-footer"  data-toggle="collapse" data-target="#addEducation" style="text-align: center;">Add Education</div></a>
+		</div>
+
+<div class="container " style="height: 10px"></div>
+<div ng-controller="displayExperience" class="panel panel-default" style="background-color:#ffffff; height: auto; width: auto;" >
+	<div class="panel-body">
+	<h2>Experience</h2>
+		<div id="addExperience" class="collapse">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+    			<label class="col-sm-2 control-label">Title</label>
+    			<div class="col-sm-10">
+      				<input ng-model="title" class="form-control" id="focusedInput" type="text" placeholder="Enter Role" required="required">
+   				 </div>
+ 			 </div>	 			
+ 			  <div class="form-group">
+    			<label class="col-sm-2 control-label"> From:</label>
+    			<div class="col-sm-4">
+      				<input ng-model="dateFrom" maxlength="4" class="form-control" id="focusedInput" type="number" placeholder="Enter Year">
+   				 </div>
+   				 <label class="col-sm-2 control-label"> Till:</label>
+    			<div class="col-sm-4">
+      				<input ng-model="dateTill" maxlength="4" class="form-control" id="focusedInput" type="number" placeholder="Enter Year">
+   				 </div>
+ 			 </div>
+ 			 <div class="form-group">
+    			<label class="col-sm-2 control-label">CompanyName :</label>
+    			<div class="col-sm-10">
+      				<input ng-model="companyName" class="form-control" id="focusedInput" type="text" placeholder="Enter company name">
+   				 </div>
+ 			 </div>
+ 			 <div class="form-group">
+				  <label class="col-sm-2 control-label">Location :</label>
+    				<div class="col-sm-10">
+    					<input ng-model="location" class="form-control" id="focusedInput" type="text" placeholder="Enter company name">
+					</div>
+			</div>
+ 			 <div class="form-group">
+    			<label class="col-sm-2 control-label">Summary :</label>
+    			<div class="col-sm-10">
+      				<textarea ng-model="summary" class="form-control" id="focusedInput" type="text" placeholder="Enter summary"></textarea>
+   				 </div>
+ 			 </div>
+ 			<div class="form-group">
+			  <label class="col-sm-2 control-label">Description</label>
+    			<div class="col-sm-10">
+			  		<textarea ng-model="description" class="form-control" rows="5" maxlength="500" id="comment"></textarea>
+				</div>
+			</div>
+			<button type="submit" ng-click="saveExpInfo()" class="btn btn-info">Save</button>&nbsp;&nbsp; <button data-toggle="collapse" data-target="#addExperience" type="button" class="btn btn-default">Cancel</button>
+ 			 </form>
+			</div>
+		<div ng-repeat="x in experiences" >
+			<div class="container" onmouseover="this.style.background='#eee';" onmouseout="this.style.background='white';" style="width:auto;" contenteditable="true">
+				<h3><span ng-hide="editing" ng-click="editing = true">{{x.title}}</span></h3>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.dateFrom}} - {{x.dateTill}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.companyName}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.location}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.summary}}</span></p>
+				<p><span ng-hide="editing" ng-click="editing = true">{{x.description}}</span></p>
+				<form ng-show="editing" ng-submit="editing = false">
+                    <label>Role:</label>
+                    <input type="text" ng-model="x.title" placeholder="Name" ng-required/>
+                    <label>Date From:</label>
+                    <input type="number" ng-model="x.dateFrom" maxlength="4" placeholder="Year" />
+                    <label>Date Till:</label>
+                    <input type="number" ng-model="x.dateTill" maxlength="4" placeholder="Year" />
+                    <label>Company name:</label>
+                    <input type="text" ng-model="x.companyName" placeholder="Company" />
+                    <label>Location:</label>
+                    <input type="text" ng-model="x.location" placeholder="City" />
+                    <label>Summary:</label>
+                    <input type="text" ng-model="x.summary" placeholder="summary"/>
+                   <label>Description:</label>
+                    <textarea type="text" ng-model="x.description" rows="4" maxlength="500" placeholder="description"></textarea>
+                  
+                    <br/>
+                    <button class="btn btn-info " type="submit" ng-click="editExp(x)">Save</button> &nbsp;&nbsp; <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                  </form>
+			</div>
+		</div>
+		</div>
+		<a ><div class="panel-footer"  data-toggle="collapse" data-target="#addExperience" style="text-align: center;">Add Experience</div></a>
+		
+</div>
+	 
+ <div class="container" style="height: 10px"></div>
+<div ng-controller="displaySkill" class="panel panel-default" style="background-color:#ffffff; height: auto; width:auto;"  >
+	<div class="panel-body">
+	<h2>Skills</h2>
+					<div id="addSkill" class="collapse">
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+			    			<label class="comment">Skill</label>
+			    			<input ng-model="skill" class="form-control" id="focusedInput" type="text" placeholder="Enter skill" required="required">
+						 </div>
+ 						 <button type="submit" ng-click="saveSkill()" class="btn btn-info">Save</button>&nbsp;&nbsp; <button data-toggle="collapse" data-target="#addSkill" type="button" class="btn btn-default">Cancel</button>
+ 			 
+ 					</form>
+ 					</div>
+ 					<div ng-repeat="x in skills" >
+ 					
+ 					<p class="btn btn-default" style="width: auto;height: auto; " ><span ng-hide="editing" ng-click="editing = true">{{x.skill}}</span></p>
+ 						 <form ng-show="editing" ng-submit="editing = false">
+ 		 						<label> Skills:</label>
+                   				 <input type="text" ng-model="x.skill" placeholder="description"/>
+                 			   <br/>
+                  		  		<button class="btn btn-info " type="submit" ng-click="editSkill(x)">Edit</button> &nbsp;&nbsp; <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                  		 </form>
+                  	</div>
+                  	 			
+ 	</div>
+ 	<a><div class="panel-footer"  data-toggle="collapse" data-target="#addSkill" style="text-align: center;">Add Skills</div></a>
+		
+		
+</div>  
+	 
+</div>
+
+</div>
+<div class="col-md-3">
+	<div class="panel panel-default" style="width:auto;height: 400px;">
+  <div class="panel-heading">
+    <h4 class="panel-title">Invitations</h4><p align="right"><span class="glyphicon glyphicon-envelope"></span></p>
+  </div>
+  <div ng-controller="displayInvitations" class="panel-body">
+  <div ng-repeat="x in invites">
+       	<div class="row" style="border-bottom: solid 1px;border-bottom-color: #eee;">
+       		<div class="col-md-6">
+       			<h5><p><span >{{x.firstName}}</span> &nbsp;&nbsp;<span >{{x.lastName}}</span></p></h5>
+				<p><span >{{x.city}}</span> , <span >{{x.country}}</span></p>
+			</div>
+			<div class="col-md-6">
+				<button ng-click="accept(x)" class="btn btn-default">Accept Invite</button>
+			</div>
+		</div>  
+   </div>  	
+  </div>
+</div>
+</div>
+<div class="col-md-1"></div>
+
+</div>
+
+</body>
+</html>

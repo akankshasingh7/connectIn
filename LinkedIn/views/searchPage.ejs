@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SearchPage</title>
+
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script src="/js/profile.js"></script>
+</head>
+<body ng-app="" style="background-color:lavender">
+<div class="row" style="height: 100px;">
+	<div class="col-md-12">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar">My Profile</span>
+            <span class="icon-bar">My Connections</span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">LinkedIn</a>
+          
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li ><a href="/myProfile">Profile</a></li>
+            <li ><a href="/myConnections">Connections</a></li>
+            <li class="active"><a href="/displayMembers">Search Members</a></li>
+            
+          	<li>
+          
+          		 <a href="/logout"><span>Logout</span></a>
+           
+          </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+   </div>
+   </div> <!-- end of header row -->
+   <div class="row" style="height:auto;">
+   	<div class="col-md-2" ></div> 
+   	<div class="col-md-6" >
+    
+  <div class="panel panel-default" style="width:auto;height: auto;">
+  <div class="panel-heading">
+    <h4 class="panel-title">Connections</h4>
+  </div>
+  <div ng-controller="searchController" class="panel-body">
+  			<div class="row" style="border-bottom: solid 2px;border-bottom-color: #eee; height: 50px;">
+  	          <form class="navbar-form navbar-right">
+		            <div class="form-group">
+		              <input ng-model="searchText" type="text" placeholder="Search" class="form-control">
+		            </div>
+		            <button type="submit" ng-click="search()">
+		            	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		            </button>
+		            
+		          </form>
+		    </div>
+     <div ng-repeat="x in members">
+       	<div class="row" style="border-bottom: solid 2px;border-bottom-color: #eee; height: 150px;">
+       		<div class="col-md-4">
+       		<img src="../images/pic2.jpg" class="img-thumbnail" alt="image" width="80" height="80">
+       		</div>
+       		<div class="col-md-5">
+       		       			<h4><p><span >{{x.firstName}}</span> &nbsp;&nbsp;<span >{{x.lastName}}</span></p></h4>
+				<p><span >{{x.city}}</span> , <span >{{x.country}}</span></p>
+			</div>
+			<div class="col-md-3">
+				<button class="btn btn-default">Send Invite</button>
+			</div>
+		</div>  
+   </div>  	
+  </div>
+  </div>
+    </div>
+    </div>
+    <div class="col-md-1"></div>
+
+</div>
+
+</body>
+</html>
